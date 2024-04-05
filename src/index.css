@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url("/public/bg2.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.icon-eye {
+  color: gray; /* Change this to match your background color */
+}
+
+/* dark mode looking sidebar  */
+::-webkit-scrollbar{
+  width: 8px;
+}
+
+::-webkit-scrollbar-track{
+  background: #555;
+}
+
+::-webkit-scrollbar-thumb{
+  background-color: #121212;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb :hover{
+  background: #242424;
+  
+}
