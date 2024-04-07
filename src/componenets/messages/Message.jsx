@@ -21,9 +21,10 @@ export const Message = ({ message }) => {
   }, []);
 
   const isToday = isSameDate(message?.createdAt)
+  const shakeClass = message?.shouldShake ? "shake": "";
 
   return (
-    <div className={`chat chat-${isSender ? "end" : "start"}`}>
+    <div className={isSender ? `chat chat-end` : `chat chat-start`}>
       <div className="chat-image avatar">
         <div className="w-10 rounded-full">
           <img
@@ -39,7 +40,7 @@ export const Message = ({ message }) => {
       <div
         className={`chat-bubble ${
           isSender ? "bg-blue-500" : "bg-gray-500"
-        } text-white`}
+        } text-white ${shakeClass}`}
       >
         {message?.message}
       </div>
