@@ -1,11 +1,14 @@
 import React from "react";
 import useConversation from "../../zostandStore/useConversation";
+import { useSocketContext } from "../../context/SocketContext";
 
 export const Conversation = (props) => {
   const { name, profileImg, icon, lastIndex, user } = props;
   //for show selected conversation highlight
   const { selectedConversation, setSelectedConversation } = useConversation();
   const isSelected = selectedConversation?._id === user?._id; 
+  const {onlineUsers} = useSocketContext(); //get online users from socket context 
+  const isOnline = onlineUsers.includes(user?._id)
   return (
     <div>
       <div
@@ -14,7 +17,7 @@ export const Conversation = (props) => {
         }`}
         onClick={() => setSelectedConversation(user)}
       >
-        <div className="avatar online">
+        <div className={`avatar ${isOnline? "online": ""}`}>
           <div className="w-12 rounded-full">
             <img
               src={

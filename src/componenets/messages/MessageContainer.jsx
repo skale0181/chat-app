@@ -3,10 +3,12 @@ import { Messages } from "./Messages";
 import { MessageInput } from "./MessageInput";
 import ForumTwoToneIcon from "@mui/icons-material/ForumTwoTone";
 import useConversation from "../../zostandStore/useConversation";
+import { useAuthContext } from "../../context/AuthContext";
 
 export const MessageContainer = () => {
   //get selected conversation from global store
   const { selectedConversation, setSelectedConversation } = useConversation();
+  const { authUser } = useAuthContext(); //get user detail
 
   useEffect(() => {
     return () => {
@@ -19,8 +21,13 @@ export const MessageContainer = () => {
     <>
       {!selectedConversation ? (
         <div className="md:min-w-[450px]">
-          {" "}
-          <NoChatSelected />
+          <div className="flex items-center justify-center w-full h-full">
+            <div className="px-4 text center sm:text-xl text-gray-200 font-semibold flex flex-col items-center gap-2">
+              <p>Welcome 👋 {authUser?.fullName} </p>
+              <p>select a chat to start messaging </p>
+              <ForumTwoToneIcon style={{ fontSize: 80 }} />
+            </div>
+          </div>
         </div>
       ) : (
         <div className="md:min-w-[450px] flex flex-col">

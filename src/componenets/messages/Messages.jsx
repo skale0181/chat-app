@@ -2,9 +2,11 @@ import React from "react";
 import { Message } from "./Message";
 import { useGetMessages } from "../../hooks/useGetMessages";
 import { ChatMessageSkeleton } from "../skeletons/ChatMessageSkeleton";
+import { useListenMessages } from "../../hooks/useListenMessages";
 
 export const Messages = () => {
   const { loading, messages } = useGetMessages();
+  useListenMessages();
   return (
     <div className="px-4 flex-1 overflow-auto">
       {/* <Message/> */}
