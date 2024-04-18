@@ -1,3 +1,4 @@
+import path from "path";
 import express from "express";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
@@ -10,9 +11,10 @@ import userRoutes from "./routes/users.routes.js";
 import connectToMongoDB from "./db/connectToMongoDB.js";
 import { app, server } from "./socket/socket.js";
 
-
 dotenv.config();
 const PORT = process.env.PORT || 5000;
+
+const __dirname = path.resolve();
 
 app.use(express.json()); //to parse the incoming request with json payload (from req.body)
 app.use(cookieParser()); //to access he cookies
@@ -20,6 +22,11 @@ app.use(cookieParser()); //to access he cookies
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 app.use("/api/users", userRoutes);
+
+app.use(express.static(path.join(__dirname, "frontend/build"))); //for deploy
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "frontend", "build", "index.html"));
+});
 
 //handle
 // app.use(bodyParser.raw({ extended: true, limit: '100mb', type: 'application/json' }));
